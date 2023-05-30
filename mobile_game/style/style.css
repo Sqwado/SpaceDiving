@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap");
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Bruno Ace SC", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: url(../images/space.png);
+  color: black;
+  overflow: hidden;
+}
+
+canvas {
+  box-shadow: black 20px 10px 50px;
+}
+
+button {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 15px;
+  font-family: "Bruno Ace SC", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+p {
+  font-size: 20px;
+  font-family: "Bruno Ace SC", Arial, Helvetica, sans-serif;
+}

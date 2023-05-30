@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Diving</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style id="style">
+    body {
+        margin: 0;
+        width: 100%;
+        height: 0%;
+        background-color: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    p {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    canvas{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<canvas id="gameCanvas"></canvas>
+
+<body>
+
+    <div class="mobile_only" id="mobile_only">
+        <p>You are on mobile</p>
+    </div>
+    <div class="tablet_only" id="tablet_only">
+        <p>You are on tablet</p>
+
+        <img src="./tablet_game/img/background.png" style="display: none;">
+        <img src="./tablet_game/img/hills.png" style="display: none;">
+        <img src="./tablet_game/img/platform.png" style="display: none;">
+        <img src="./tablet_game/img/platformSmallTall.png" style="display: none;">
+        <img src="./tablet_game/img/platformCube.png" style="display: none;">
+
+        <img src="./tablet_game/img/spriteRunLeft.png" style="display: none;">
+        <img src="./tablet_game/img/spriteRunRight.png" style="display: none;">
+        <img src="./tablet_game/img/spriteStandLeft.png" style="display: none;">
+        <img src="./tablet_game/img/spriteStandRight.png" style="display: none;">
+
+        <img src="./tablet_game/img/bullet.png" style="display: none;">
+        <img src="./tablet_game/img/greenball.png" style="display: none;">
+        <img src="./tablet_game/img/greenmonster.png" style="display: none;">
+
+        <audio id="audio" src="./tablet_game/music/dooming.mp3" > </audio>
+
+    </div>
+    <div class="pc_only" id="pc_only">
+        <p>You are on pc</p>
+    </div>
+
+</body>
+<script type="module" src="app.js"></script>
+<script type="module" id="game_js" src=""> </script>
+
+</html>
