@@ -720,7 +720,7 @@ function animate() {
 
 // gestion des touches
 window.addEventListener("keydown", ({ keyCode }) => {
-    if (device_type == "tablet") {
+    if (device_type == "pc") {
         //  console.log(keyCode)
         switch (keyCode) {
             case 81:
@@ -747,7 +747,7 @@ window.addEventListener("keydown", ({ keyCode }) => {
 })
 
 window.addEventListener("keyup", ({ keyCode }) => {
-    if (device_type == "tablet") {
+    if (device_type == "pc") {
         //  console.log(keyCode)
         switch (keyCode) {
             case 81:
@@ -800,7 +800,7 @@ function firegun() {
 }
 
 window.addEventListener("mousedown", () => {
-    if (device_type == "tablet") {
+    if (device_type == "pc") {
         holding = true
         firegun()
         let fireloop = setInterval(() => {
@@ -814,7 +814,7 @@ window.addEventListener("mousedown", () => {
 })
 
 window.addEventListener("mouseup", () => {
-    if (device_type == "tablet") {
+    if (device_type == "pc") {
         holding = false
     }
 })

@@ -15,12 +15,8 @@ const pc_only = document.getElementById("pc_only");
 
 export let device_type = "pc";
 
-function reportWindowSize() {
-    setdisplay()
-}
-
-window.onresize = reportWindowSize;
-window.onload = reportWindowSize;
+window.onresize = setdisplay;
+window.onload = setdisplay;
 
 function setdisplay() {
     if (window.innerWidth <= window.innerHeight) {
