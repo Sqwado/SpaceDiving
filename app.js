@@ -1,6 +1,6 @@
 
-import { stopGame } from "./tablet_game/index.js";
-import { lauchGame } from "./tablet_game/index.js";
+import { stopGame } from "./pc_game/index.js";
+import { lauchGame } from "./pc_game/index.js";
 
 import { stopall } from "./mobile_game/index.js";
 import { startGame } from "./mobile_game/index.js";
@@ -47,45 +47,48 @@ function setgame() {
         case "pc":
             stopmobile()
             stoptablet()
+            stoppc()
             setpc()
             break
         case "tablet":
-            stoptablet()
             stopmobile()
+            stoptablet()
+            stoppc()
             settablet()
             break
         case "mobile":
-            stoptablet()
             stopmobile()
+            stoptablet()
+            stoppc()
             setmobile()
             break
     }
 
 }
 
-function setpc() {
-
-
-}
-
-function stoptablet() {
+function stoppc() {
     stopGame()
     if (head.contains(script)) {
         script.remove()
     }
-
 }
 
-function settablet() {
-
+function setpc() {
     script = document.createElement('script');
     script.type = 'module';
-    script.src = "tablet_game/index.js"
+    script.src = "pc_game/index.js"
 
     // Fire the loading
     head.appendChild(script);
 
     lauchGame()
+}
+
+function stoptablet() {
+
+}
+
+function settablet() {
 
 }
 

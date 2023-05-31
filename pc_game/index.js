@@ -9,8 +9,8 @@ let game_on = false
 let show_line = false
 
 let initial_path
-if (window.location.pathname.split('/')[1] != "tablet_game") {
-    initial_path = "./tablet_game/"
+if (window.location.pathname.split('/')[1] != "pc_game") {
+    initial_path = "./pc_game/"
 } else {
     initial_path = "./"
 }
@@ -32,7 +32,7 @@ ad_gun.volume = 0.5
 window.addEventListener("click", playMusic);
 
 function playMusic() {
-    if (device_type == "tablet") {
+    if (device_type == "pc") {
         audioplay.play()
         window.removeEventListener("click", playMusic)
     }
