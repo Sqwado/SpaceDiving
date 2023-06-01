@@ -202,14 +202,17 @@ export function startGame() {
   ctx.fillText("SpaceDiving", (canvas.width / 1.95) - (38 * 3.5), canvas.height / 2.5);
 
   // Bouton start
+  if (document.contains(document.getElementById("start-btn"))) {
+    document.getElementById("start-btn").remove();
+  }
   start = document.getElementById("start-btn");
   if (!start) {
     start = document.createElement("button");
     start.id = "start-btn";
     start.innerText = "Start";
     start.style.position = "absolute";
-    start.style.top = canvas.height / 2 + 50 + "px";
-    start.style.left = canvas.width / 2 - 50 + "px";
+    start.style.top = canvas.height / 2 + 25 + "px";
+    start.style.left = canvas.width / 2 - 60 + "px";
     document.body.appendChild(start);
   }
 
@@ -228,7 +231,11 @@ function startclick() {
 // startGame();
 
 export function stopall() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   clearInterval(interval)
   clearInterval(gaming)
+  if (document.contains(document.getElementById("start-btn"))) {
+    document.getElementById("start-btn").remove();
+  }
 
 }

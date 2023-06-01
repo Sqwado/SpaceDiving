@@ -8,6 +8,7 @@ let game_on = false
 // show collisions and debug lines
 let show_line = false
 
+
 let initial_path
 if (window.location.pathname.split('/')[1] != "pc_game") {
     initial_path = "./pc_game/"
@@ -93,6 +94,7 @@ function getMousePos(canvas, evt) {
 
 // variable par default
 let deadman = false
+let wined = false
 let BulletId = 0
 let FireBallId = 0
 const gravity = 1
@@ -154,21 +156,39 @@ class Player {
         if (this.imgwidth > this.width) {
             offset = (this.imgwidth / 4)
         }
-        c.drawImage(
-            this.currentSprite,
-            this.currentCropWidth * this.frames,
-            0,
-            this.currentCropWidth,
-            400,
-            this.position.x - offset,
-            this.position.y,
-            this.imgwidth,
-            this.height)
-        if (show_line) {
-            c.beginPath();
-            c.rect(this.position.x, this.position.y, this.width, this.height);
-            c.stroke();
+        if (!deadman) {
+            c.drawImage(
+                this.currentSprite,
+                this.currentCropWidth * this.frames,
+                0,
+                this.currentCropWidth,
+                400,
+                this.position.x - offset,
+                this.position.y,
+                this.imgwidth,
+                this.height)
+            if (show_line) {
+                c.beginPath();
+                c.rect(this.position.x, this.position.y, this.width, this.height);
+                c.stroke();
+            }
+
+            // life bar
+            c.fillStyle = 'hsla(' + 0 + ', 100%, 40%, 1)';
+            c.fillRect(this.position.x - (this.width / 3.5), this.position.y - 10, 100, 10);
+            var grad = c.createLinearGradient(0, 0, 0, 130);
+            grad.addColorStop(0, "green");
+            grad.addColorStop(1, "rgba(18,244,90,1)");
+            c.fillStyle = grad;
+            c.fillRect(this.position.x - (this.width / 3.5), this.position.y - 10, this.life, 10);
+        } else {
+            c.save();
+            c.translate(this.position.x, this.position.y)
+            c.rotate(this.rotation * Math.PI / 180);
+            c.drawImage(createImage(initial_path + "img/dead.png"), - this.width / 2, - this.height / 2);
+            c.restore();
         }
+
     }
 
     update() {
@@ -339,7 +359,7 @@ class FireBallObject {
             player.position.y <= this.position.y + (this.height / 2)) {
             this.velocity = 0
             fireBallObjects.splice(fireBallObjects.indexOf(this), 1)
-            player.life -= 10
+            player.life -= 25
         }
 
         platforms.forEach(platform => {
@@ -435,7 +455,7 @@ let bulletObjects = []
 let fireBallObjects = []
 
 let lastKey
-const keys = {
+let keys = {
     right: {
         pressed: false
     },
@@ -484,6 +504,10 @@ function init() {
     reloading = false
     reloadsound = true
     deadman = false
+    wined = false
+
+    keys.left.pressed = false
+    keys.right.pressed = false
 
 }
 
@@ -694,12 +718,20 @@ function animate() {
 
     // win condition
     if (scrollOffset > platformImage.width * 4 + 100 - 2) {
-        console.log("you win")
+        if (!wined) {
+            player.velocity.y = 0
+            wined = true
+            console.log("you win")
+            setTimeout(() => {
+                init()
+            }, 1000)
+        }
     }
 
     // lose condition
     if (player.position.y > canvas.height || player.life <= 0) {
         if (!deadman) {
+            player.velocity.y = 0
             deadman = true
             canshoot = false
             new Audio(initial_path + "sound/death.mp3").play()
@@ -720,7 +752,7 @@ function animate() {
 
 // gestion des touches
 window.addEventListener("keydown", ({ keyCode }) => {
-    if (device_type == "pc") {
+    if (device_type == "pc" && !deadman && !wined) {
         //  console.log(keyCode)
         switch (keyCode) {
             case 81:
@@ -747,6 +779,7 @@ window.addEventListener("keydown", ({ keyCode }) => {
 })
 
 window.addEventListener("keyup", ({ keyCode }) => {
+    player.velocity.y = 0
     if (device_type == "pc") {
         //  console.log(keyCode)
         switch (keyCode) {
@@ -852,9 +885,5 @@ export function lauchGame() {
     }
 
 }
-
-
-
-
 
 // },1000)

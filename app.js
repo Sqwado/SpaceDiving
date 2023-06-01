@@ -8,6 +8,8 @@ import { startGame } from "./mobile_game/index.js";
 const game_js = document.getElementById("game_js")
 var head = document.head;
 var script;
+let switching = false
+let load
 
 const mobile_only = document.getElementById("mobile_only");
 const tablet_only = document.getElementById("tablet_only");
@@ -39,25 +41,63 @@ function setdisplay() {
 }
 
 function setgame() {
-    switch (device_type) {
-        case "pc":
-            stopmobile()
-            stoptablet()
-            stoppc()
-            setpc()
-            break
-        case "tablet":
-            stopmobile()
-            stoptablet()
-            stoppc()
-            settablet()
-            break
-        case "mobile":
-            stopmobile()
-            stoptablet()
-            stoppc()
-            setmobile()
-            break
+    if (!switching) {
+        switch (device_type) {
+            case "pc":
+                switching = true
+                stopmobile()
+                stoptablet()
+                stoppc()
+                load = document.createElement("p");
+                load.id = "load";
+                load.innerText = "Loading ...";
+                load.style.position = "absolute";
+                load.style.top = window.innerHeight / 2 + 12.5 + "px";
+                load.style.left = window.innerWidth / 2 - 60 + "px";
+                document.body.appendChild(load);
+                setTimeout(() => {
+                    switching = false
+                    setpc()
+                    document.getElementById("load").remove();
+                }, 1000);
+                break
+            case "tablet":
+                switching = true
+                stopmobile()
+                stoptablet()
+                stoppc()
+                load = document.createElement("p");
+                load.id = "load";
+                load.innerText = "Loading ...";
+                load.style.position = "absolute";
+                load.style.top = window.innerHeight / 2 + 12.5 + "px";
+                load.style.left = window.innerWidth / 2 - 60 + "px";
+                document.body.appendChild(load);
+                setTimeout(() => {
+                    switching = false
+                    settablet()
+                    document.getElementById("load").remove();
+                }, 1000); 
+                break
+            case "mobile":
+                switching = true
+                stopmobile()
+                stoptablet()
+                stoppc()
+                load = document.createElement("p");
+                load.id = "load";
+                load.innerText = "Loading ...";
+                load.style.position = "absolute";
+                load.style.top = window.innerHeight / 2 + 12.5 + "px";
+                load.style.left = window.innerWidth / 2 - 60 + "px";
+                document.body.appendChild(load);
+                setTimeout(() => {
+                    switching = false
+                    setmobile()
+                    document.getElementById("load").remove();
+                }, 1000);
+                break
+        }
     }
 
 }
