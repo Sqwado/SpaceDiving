@@ -42,12 +42,3 @@ p {
   font-family: "Bruno Ace SC", Arial, Helvetica, sans-serif;
 }
 
-.center{
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-
-}
-
